@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier {{ book.title }}{% endblock %}
+
+{% block body %}
+    <h1>Modifier le livre : {{ book.title }}</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-primary mt-2">Mettre à jour</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('books_show', {slug: book.slug}) }}" class="btn btn-secondary mt-3">Retour aux détails</a>
+
+    {% if app.user == book.user or is_granted('ROLE_ADMIN') %}
+        <form method="post" action="{{ path('books_delete', {slug: book.slug}) }}" style="display:inline-block;">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ book.id) }}">
+            <button class="btn btn-danger mt-2" onclick="return confirm('Supprimer ce livre ?');">Supprimer</button>
+        </form>
+    {% endif %}
+{% endblock %}

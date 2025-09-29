@@ -1,3 +1,31 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+# config/routes.yaml
+
+home:
+  path: /
+  controller: App\Controller\HomeController::index
+
+# Book routes
+books_index:
+  path: /books/
+  controller: App\Controller\BookController::index
+  methods: GET
+
+books_new:
+  path: /books/new
+  controller: App\Controller\BookController::new
+  methods: [GET, POST]
+
+books_edit:
+  path: /books/{slug}/edit
+  controller: App\Controller\BookController::edit
+  methods: [GET, POST]
+
+books_show:
+  path: /books/{slug}
+  controller: App\Controller\BookController::show
+  methods: GET
+
+books_delete:
+  path: /books/{slug}/delete
+  controller: App\Controller\BookController::delete
+  methods: POST
